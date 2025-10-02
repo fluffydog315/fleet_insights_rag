@@ -1,0 +1,12 @@
+.DS_Store
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+vectorstore/
+data/processed/
+*.log
+.env
+.env
+vectorstore/
+data/processed/
+.DS_Store

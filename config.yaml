@@ -1,0 +1,5 @@
+# Basic config for chunking and retrieval
+chunk_size: 800
+chunk_overlap: 120
+top_k: 4
+index_path: ./vectorstore/faiss_index
