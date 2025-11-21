@@ -3,3 +3,13 @@ chunk_size: 800
 chunk_overlap: 120
 top_k: 4
 index_path: ./vectorstore/faiss_index
+
+# Embedding configuration
+embedding:
+  mode: auto  # auto, openai, openai-legacy, local
+  batch_size: 100
+
+# Incremental indexing
+incremental:
+  enabled: true
+  tracker_path: ./vectorstore/document_tracker.json

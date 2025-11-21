@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()  # load .env for OPENAI_API_KEY, PYTHONPATH etc.
 
 from src.embed_store import load_faiss
-from src.splitters import load_config
+from src.config_manager import get_config
 from langchain.chains import RetrievalQA
 from langchain_openai import ChatOpenAI
 from langchain.schema import Document
@@ -14,10 +14,17 @@ from langchain.schema import Document
 st.set_page_config(page_title="Fleet Insights RAG", layout="wide")
 st.title("🚛 Fleet Insights RAG Demo")
 
+# Load configuration
+config = get_config()
+
+# Show embedding mode
+st.sidebar.markdown("### ⚙️ Configuration")
+st.sidebar.info(f"**Embedding Mode:** {config.embedding_mode}")
+st.sidebar.info(f"**Incremental:** {'✅ Enabled' if config.is_incremental_enabled() else '❌ Disabled'}")
+
 # Load FAISS retriever
-cfg = load_config()
-db = load_faiss(cfg["index_path"])
-retriever = db.as_retriever(search_kwargs={"k": 3})
+db = load_faiss()
+retriever = db.as_retriever(search_kwargs={"k": config.get("top_k", 3)})
 
 # LLM (uses OpenAI, but you can extend to HuggingFace fallback)
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)

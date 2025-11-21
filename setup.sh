@@ -18,4 +18,5 @@ cp .env.example .env
 python -m src.ingest
 
 # 5) run app
-streamlit run src/app.py
+cd /Users/ywchen/project/fleet_insights_rag
+PYTHONPATH=. streamlit run src/app.py
